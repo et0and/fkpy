@@ -29,6 +29,6 @@ with open("output.csv", "w", newline="") as csvfile:
             text_content = re.sub(r"\s+", " ", text_content).strip()
 
             # Calculate Flesch Kincaid readability score
-            fk_score = textstat.flesch_kincaid_grade(text_content)
+            fk_score = textstat.flesch_reading_ease(text_content)
         except Exception as e:
             print(f"Error processing URL: {url}, {e}")
