@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 import csv
 import re
 import textstat
+from tqdm import tqdm
 
 # Read single/multiple URLs from a text file
 with open("urls.txt", "r") as f:
@@ -15,7 +16,7 @@ with open("output.csv", "w", newline="") as csvfile:
     writer.writerow(["URL", "Flesch Kincaid Score"])
 
     # Iterate through URLs
-    for url in urls:
+    for url in tqdm(urls):  # Add tqdm here
         try:
             # Fetch the webpage content
             response = requests.get(url)
@@ -30,5 +31,6 @@ with open("output.csv", "w", newline="") as csvfile:
 
             # Calculate Flesch Kincaid readability score
             fk_score = textstat.flesch_reading_ease(text_content)
+            writer.writerow([url, fk_score])  # Don't forget to write the score to the CSV
         except Exception as e:
             print(f"Error processing URL: {url}, {e}")
