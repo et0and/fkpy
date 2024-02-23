@@ -23,7 +23,7 @@ with open("output.csv", "w", newline="") as csvfile:
 
             # Extract and clean the text content. Assumes that content is in a standard p or article tag.
             text_content = " ".join(
-                [p.text for p in soup.find_all(["p", "article"])]
+                [p.text for p in soup.find_all(["p", "article", "h1", "h2", "h3", "h4", "li"])]
             )
             text_content = re.sub(r"[^\w\s]", "", text_content)
             text_content = re.sub(r"\s+", " ", text_content).strip()
